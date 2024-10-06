@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .btn-register {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .btn-register:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .action-links a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .action-links a:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra de navegación -->
+<div class="navbar">
+    <a href="/user/all">Usuarios</a>
+    <a href="/product/all">Productos</a>
+</div>
+
+<!-- Contenido de la página -->
+<div class="container">
+    <h2>Lista de Productos</h2>
+
+    <!-- Botón para registrar un nuevo producto -->
+    <a href="/product/new" class="btn-register">Registrar Nuevo Producto</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>SKU</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Marca</th>
+            <th>Tienda</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">1</td>
+            <td th:text="${product.sku}">SKU</td>
+            <td th:text="${product.name}">Nombre</td>
+            <td th:text="${product.price}">Precio</td>
+            <td th:text="${product.brand}">Marca</td>
+            <td th:text="${product.store}">Tienda</td>
+            <td class="action-links">
+                <a th:href="@{/product/delete/{id}(id=${product.id})}" onclick="return confirm('¿Estás seguro de eliminar este producto?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
